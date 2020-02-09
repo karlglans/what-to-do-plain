@@ -1,9 +1,20 @@
 import React, {useState} from 'react';
 
-function Input() {
+function Input(props) {
   const [inputText, setInputText] = useState("input text");
+
+  function _handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      setInputText('');
+      props.addTodo(e.target.value);
+    }
+  }
+
   return (
-    <input onChange={(event) => setInputText(event.target.value)} style={{width: '100%'}} value={inputText} />
+    <input
+      onKeyDown={_handleKeyDown}
+      onChange={(event) => setInputText(event.target.value)} 
+      style={{width: '100%'}} value={inputText} />
   );
 }
 
